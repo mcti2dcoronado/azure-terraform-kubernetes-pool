@@ -14,7 +14,7 @@ variable "tenant_id"{
 variable "convention" {
   type        = string
   description = "Define naming convention"
-  default     = "k9s-mcti-lab-central-canada"
+  default     = "k9s-mcti-lab"
 }
 variable "resource_group_name" {
    description  = "Name of the resource group in which resources will be created"
