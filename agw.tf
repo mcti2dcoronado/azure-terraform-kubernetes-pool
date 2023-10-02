@@ -27,10 +27,11 @@ resource "azurerm_public_ip" "pipmcit" {
 }
 
 resource "azurerm_application_gateway" "agwmcit" {
-  name                = "agw-${var.convention}"
+  for_each            = azurerm_web_application_firewall_policy.awfmcit
+  name                = "agw-${var.convention}-${each.key}"
   resource_group_name = azurerm_resource_group.mcit.name
   location            = azurerm_resource_group.mcit.location
-  firewall_policy_id  = azurerm_web_application_firewall_policy.awfmcit.id    
+  firewall_policy_id  = each.value.id    
 
   sku {
     name     = "Standard_v2"
@@ -74,11 +75,12 @@ resource "azurerm_application_gateway" "agwmcit" {
   }
 
   http_listener {
+    for_each                       = azurerm_web_application_firewall_policy.awfmcit
     name                           = local.listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
     protocol                       = "Http"
-    firewall_policy_id             = azurerm_web_application_firewall_policy.awfmcit.id
+    firewall_policy_id             = each.value.id
   }
 
   request_routing_rule {
