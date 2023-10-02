@@ -1,3 +1,4 @@
+/*
 resource "azurerm_kubernetes_cluster_node_pool" "myk8spool" {
   for_each              = azurerm_kubernetes_cluster.myk8s
   name                  = "${each.key}"
@@ -9,4 +10,4 @@ resource "azurerm_kubernetes_cluster_node_pool" "myk8spool" {
     Environment = "Production"
   }
 }
-
+*/
