@@ -31,7 +31,7 @@ resource "azurerm_application_gateway" "agwmcit" {
   name                = "agw-${var.convention}-${each.key}"
   resource_group_name = azurerm_resource_group.mcit.name
   location            = azurerm_resource_group.mcit.location
-  firewall_policy_id  = each.value.id    
+  firewall_policy_id  = "${each.key}"    
 
   sku {
     name     = "Standard_v2"
@@ -79,7 +79,7 @@ resource "azurerm_application_gateway" "agwmcit" {
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
     protocol                       = "Http"
-    firewall_policy_id             = each.value.id
+    firewall_policy_id             = "${each.key}"
   }
 
   request_routing_rule {
