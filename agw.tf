@@ -75,7 +75,6 @@ resource "azurerm_application_gateway" "agwmcit" {
   }
 
   http_listener {
-    for_each                       = azurerm_web_application_firewall_policy.awfmcit
     name                           = local.listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
